@@ -17,7 +17,7 @@ set -g terminal-overrides 'xterm*:XT:smcup@:rmcup@'
 set -ga terminal-overrides ",rxvt*:XT"
 
 # Don't start a login shell
-set -g default-command bash
+set -g default-command /bin/zsh
 
 # Set default terminal to screen-256color
 set -g default-terminal "screen-256color"

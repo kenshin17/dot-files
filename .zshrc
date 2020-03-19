@@ -110,7 +110,7 @@ alias myip="curl -4 https://ifconfig.co/ip;"
 
 ## CURL UPLOAD FILE
 transfer() {
-    curl -H "Max-Downloads: 1" -H "Max-Days: 5" --progress-bar --upload-file "$1" http://transfer.sh/ | tee /dev/null;
+    curl -H "Max-Downloads: 1" -H "Max-Days: 5" --progress-bar --upload-file "$1" http://transfer.sh/ | tee /dev/null; echo;
 }
 
 alias transfer=transfer

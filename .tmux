@@ -1,6 +1,7 @@
 set -g prefix F1
 set -g pane-base-index 1
 
+bind-key a  send-prefix
 # set title on
 set -g set-titles on
 

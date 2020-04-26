@@ -2,17 +2,28 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/root/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_MODE="awesome-patched"
+# ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
 
-# Set list of themes to pick from when loading at random
+# Install dracula ZSH using Git
+# If you are a git user, you can install the theme and keep up to date by cloning the repo:
+# $ git clone https://github.com/dracula/zsh.git
+# And creating a symbolic link to oh-my-zsh's theme folder:
+# $ ln -s $DRACULA_THEME/dracula.zsh-theme $OH_MY_ZSH/themes/dracula.zsh-theme
+# https://draculatheme.com/zsh/
+ZSH_THEME="dracula"
+
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# POWERLEVEL9K_MODE="awesome-patched"
+
+#
+#Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
@@ -70,8 +81,7 @@ POWERLEVEL9K_MODE="awesome-patched"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git)
-plugins=(git zsh-autosuggestions autojump zsh-syntax-highlighting)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,17 +110,22 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-### CHECK IP
-alias myip="curl -4 https://ifconfig.co/ip;"
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-## CURL UPLOAD FILE
-transfer() {
-    curl -H "Max-Downloads: 1" -H "Max-Days: 5" --progress-bar --upload-file "$1" http://transfer.sh/ | tee /dev/null; echo;
-}
+alias gsync="git checkout master && git fetch upstream && git rebase upstream/master && git push"
+alias glog='git log --graph --oneline --decorate --all'
 
-alias transfer=transfer
+export PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[pink]%}%D{%T}%{$reset_color%} [$(whoami)] %{$fg_bold[blue]%}%c $(git_prompt_info)% %{$reset_color%}'
+
+# Setting ag as the default source for fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
+# source ~/.zshrc.local
+
